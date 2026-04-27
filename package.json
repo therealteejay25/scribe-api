@@ -1,7 +1,7 @@
 {
-  "name": "conduit-api-node",
+  "name": "scribe-api",
   "version": "1.0.0",
-  "description": "RealWorld API implementation with Node.js, TypeScript, Express, and MongoDB",
+  "description": "Social blogging platform API with Node.js, TypeScript, Express, and MongoDB",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -9,7 +9,7 @@
     "start": "node dist/server.js",
     "seed": "tsx src/seeds/seed.ts"
   },
-  "keywords": ["realworld", "api", "express", "mongodb", "typescript"],
+  "keywords": ["blogging", "api", "express", "mongodb", "typescript", "social", "articles"],
   "author": "",
   "license": "MIT",
   "dependencies": {

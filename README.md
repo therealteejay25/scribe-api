@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚀 RealWorld API
+# ✍️ Scribe API
 
-### _Production-Ready REST API with Node.js, TypeScript & MongoDB_
+### _Production-Ready Social Blogging Platform API with Node.js, TypeScript & MongoDB_
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -10,7 +10,7 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)](https://jwt.io/)
 
-**A fully spec-compliant [RealWorld](https://realworld-docs.netlify.app/) API implementation**
+**A powerful REST API for building social blogging platforms where users can publish articles, follow authors, and engage with content**
 
 [Features](#-features) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation) • [Architecture](#-architecture) • [Security](#-security)
 
@@ -37,9 +37,10 @@
 ### 📝 Articles & Content
 - ✅ CRUD operations
 - ✅ Auto-generated slugs
-- ✅ Image support
+- ✅ Cover image support
 - ✅ Tag-based categorization
 - ✅ Markdown/HTML content
+- ✅ Auto-calculated read time
 
 </td>
 </tr>
@@ -52,6 +53,7 @@
 - ✅ Bookmark system
 - ✅ Comment threads
 - ✅ Share tracking
+- ✅ Comment counts
 
 </td>
 <td width="50%">
@@ -62,6 +64,7 @@
 - ✅ Tag filtering
 - ✅ Author filtering
 - ✅ Pagination & sorting
+- ✅ Bookmarked articles list
 
 </td>
 </tr>
@@ -211,10 +214,21 @@ GET    /api/user               # Get current user (auth)
 PUT    /api/user               # Update user (auth)
 ```
 
+**Register Example:**
+```json
+{
+  "user": {
+    "username": "johndoe",
+    "email": "john@example.com",
+    "password": "password123"
+  }
+}
+```
+
 </details>
 
 <details>
-<summary><b>👤 Profiles</b></summary>
+<summary><b>� Profiles</b></summary>
 
 ```http
 GET    /api/profiles/:username           # Get user profile
@@ -234,6 +248,19 @@ PUT    /api/articles/:slug        # Update article (auth, author only)
 DELETE /api/articles/:slug        # Delete article (auth, author only)
 GET    /api/articles              # List articles (supports filtering)
 GET    /api/articles/feed         # Get personalized feed (auth)
+```
+
+**Create Article Example:**
+```json
+{
+  "article": {
+    "title": "Getting Started with TypeScript",
+    "description": "A comprehensive guide",
+    "body": "Full article content in markdown...",
+    "image": "https://example.com/cover.jpg",
+    "tagList": ["typescript", "javascript", "tutorial"]
+  }
+}
 ```
 
 **Query Parameters for List:**
@@ -272,6 +299,15 @@ GET    /api/articles/:slug/comments       # Get all comments
 DELETE /api/articles/:slug/comments/:id   # Delete comment (auth, author only)
 ```
 
+**Add Comment Example:**
+```json
+{
+  "comment": {
+    "body": "Great article! Very helpful."
+  }
+}
+```
+
 </details>
 
 <details>
@@ -302,22 +338,41 @@ All responses follow consistent envelope patterns:
 }
 ```
 
+### Article Response
+```json
+{
+  "article": {
+    "slug": "getting-started-with-typescript-abc123",
+    "title": "Getting Started with TypeScript",
+    "description": "A comprehensive guide",
+    "body": "Full article content...",
+    "image": "https://example.com/cover.jpg",
+    "tagList": ["typescript", "javascript"],
+    "createdAt": "2024-01-15T10:30:00.000Z",
+    "updatedAt": "2024-01-15T10:30:00.000Z",
+    "favorited": false,
+    "favoritesCount": 5,
+    "liked": false,
+    "likesCount": 12,
+    "bookmarked": false,
+    "bookmarksCount": 3,
+    "sharesCount": 8,
+    "commentsCount": 4,
+    "readTime": 5,
+    "author": {
+      "username": "johndoe",
+      "bio": "Full-stack developer",
+      "image": "https://example.com/avatar.jpg",
+      "following": false
+    }
+  }
+}
+```
+
 ### Collection Resource
 ```json
 {
-  "articles": [
-    {
-      "slug": "how-to-build-apis-abc123",
-      "title": "How to Build APIs",
-      "description": "A comprehensive guide",
-      "body": "Full article content...",
-      "tagList": ["nodejs", "api"],
-      "createdAt": "2024-01-15T10:30:00.000Z",
-      "favorited": false,
-      "favoritesCount": 5,
-      "author": { "username": "johndoe", "following": false }
-    }
-  ],
+  "articles": [...],
   "articlesCount": 42
 }
 ```
@@ -354,7 +409,7 @@ All responses follow consistent envelope patterns:
 
 ---
 
-## 📂 Project Structure
+## � Project Structure
 
 ```
 src/
@@ -409,7 +464,7 @@ pnpm start
 
 ---
 
-## 🚢 Deployment
+## � Deployment
 
 ### Recommended Platforms
 
@@ -447,7 +502,7 @@ pnpm start
 
 ---
 
-## 🎯 What Makes This Special?
+## 🎯 What Makes Scribe API Special?
 
 <table>
 <tr>
@@ -496,13 +551,13 @@ JWT auth, bcrypt, rate limiting, and input validation
 
 ## 🤝 Contributing
 
-This is a portfolio/learning project implementing the [RealWorld spec](https://realworld-docs.netlify.app/). Feel free to fork and customize!
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
 ---
 
 ## 📄 License
 
-MIT License - feel free to use this project for learning or as a starting point for your own API!
+MIT License - feel free to use this project for learning or as a starting point for your own blogging platform API!
 
 ---
 
@@ -512,6 +567,6 @@ MIT License - feel free to use this project for learning or as a starting point 
 
 **Built with ❤️ using Node.js, TypeScript, Express, and MongoDB**
 
-[⬆ Back to Top](#-realworld-api)
+[⬆ Back to Top](#️-scribe-api)
 
 </div>
